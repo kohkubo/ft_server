@@ -24,16 +24,13 @@ mysql -e "CREATE USER IF NOT EXISTS 'user@localhost' IDENTIFIED BY 'password';"
 mysql -e "GRANT ALL ON wddb.* TO 'user@localhost'"
 mysql -e "FLUSH PRIVILEGES;"
 
-mkdir -p /var/www/html/phpmyadmin
-wget -O phpmyadmin.tar.gz --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz
-wget https://ja.wordpress.org/latest-ja.tar.gz
-tar -xvf phpmyadmin.tar.gz -C /var/www/html/phpmyadmin --strip-components 1
-rm -rf phpmyadmin.tar.gz
+curl -OL --insecure https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz
+tar -zxvf phpMyAdmin-5.0.4-all-languages.tar.gz
+mv phpMyAdmin-5.0.4-all-languages /var/www/html/phpmyadmin
 
-mkdir -p /var/www/html/wordpress
-wget -O wordpress.tar.gz --no-check-certificate https://wordpress.org/latest.tar.gz
-tar -xzf wordpress.tar.gz -C /var/www/html/wordpress --strip-components 1
-rm -rf wordpress.tar.gz
+curl -OL --insecure https://ja.wordpress.org/latest-ja.tar.gz
+tar -zxvf latest-ja.tar.gz
+mv wordpress /var/www/html/
 mv /var/www/html/wp-config.php /var/www/html/wordpress/wp-config.php
 
 mkdir -p /var/www/html/test
