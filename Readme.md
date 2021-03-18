@@ -7,13 +7,13 @@ docker build -t ft_server .
 ## コンテナの起動
 
 ```terminal
-docker run --name ft_server -p 80:80 -p 443:443 ft_server
+docker run --name ft_server -p 8080:80 -p 443:443 ft_server
 ```
 
 ## autoindex offで起動
 
 ```terminal
-docker run --name ft_server -p 80:80 -p 443:443 -e AUTOINDEX=off ft_server
+docker run --name ft_server -p 8080:80 -p 443:443 -e AUTOINDEX=off ft_server
 ```
 
 ## コンテナの中に入る
@@ -85,4 +85,11 @@ docker container prune
 
 docker images
 いらないimageを全部消す
+```
+
+## その他 Tips
+
+```
+# requestヘッダでホスト情報を書き換えて送信する
+$ curl -H 'Host:example.com.' http://localhost:8080
 ```

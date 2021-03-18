@@ -1,14 +1,16 @@
 server {
-	listen 80;
-	listen [::]:80;
-	server_name my_server;
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	server_name ft_server;
 	return 301 https://$host$request_uri;
 }
 
 server {
-	listen 443 ssl;
-	listen [::]:443 ssl;
+	listen 443 ssl default_server;
+	listen [::]:443 ssl default_server;
 
+	server_name ft_server;
 	ssl on;
 	ssl_certificate /etc/nginx/ssl/nginx_selfsigned.crt;
 	ssl_certificate_key /etc/nginx/ssl/nginx_selfsigned.key;
