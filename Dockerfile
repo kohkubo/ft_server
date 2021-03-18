@@ -30,11 +30,11 @@ RUN service mysql start \
 	&& mysql -e "FLUSH PRIVILEGES;"
 
 RUN curl -OL --insecure https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz \
-	&& tar -zxvf phpMyAdmin-5.0.4-all-languages.tar.gz \
+	&& tar -xvf phpMyAdmin-5.0.4-all-languages.tar.gz \
 	&& mv phpMyAdmin-5.0.4-all-languages /var/www/html/phpmyadmin
 
 RUN curl -OL --insecure https://ja.wordpress.org/latest-ja.tar.gz \
-	&& tar -zxvf latest-ja.tar.gz \
+	&& tar -xvf latest-ja.tar.gz \
 	&& mv wordpress /var/www/html/
 
 RUN mkdir -p /var/www/html/test \
