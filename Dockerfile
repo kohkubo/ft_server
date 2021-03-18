@@ -1,16 +1,14 @@
 FROM debian:buster
 ENV AUTOINDEX=on
 
-COPY ./srcs/nginx_init.sh ./
-COPY ./srcs/nginx_config ./etc/nginx/sites-available/nginx_config
-COPY ./srcs/wp-config.php /var/www/html/wp-config.php
+WORKDIR /tmp
+COPY srcs .
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     curl \
     nginx \
     openssl \
-    wget \
     mariadb-server \
     php-fpm php-mysql \
     php7.3
@@ -38,14 +36,17 @@ RUN curl -OL --insecure https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin
 RUN curl -OL --insecure https://ja.wordpress.org/latest-ja.tar.gz && \
     tar -zxvf latest-ja.tar.gz && \
     mv wordpress /var/www/html/ && \
-    mv /var/www/html/wp-config.php /var/www/html/wordpress/wp-config.php
+    mv wp-config.php /var/www/html/wordpress/wp-config.php
 
 RUN mkdir -p /var/www/html/test && \
     chown -R www-data:www-data /var/www/html/* && \
     find /var/www/html/ -type d -exec chmod 755 {} + && \
     find /var/www/html/ -type f -exec chmod 644 {} +
 
-RUN ln -s /etc/nginx/sites-available/nginx_config /etc/nginx/sites-enabled/nginx_config && \
+RUN mv nginx_config /etc/nginx/sites-available/nginx_config && \
+    ln -s /etc/nginx/sites-available/nginx_config /etc/nginx/sites-enabled/nginx_config && \
     rm -rf /etc/nginx/sites-enabled/default
+
+EXPOSE 80 443
 
 ENTRYPOINT ["bash", "./nginx_init.sh"]
