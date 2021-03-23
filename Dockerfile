@@ -37,14 +37,14 @@ RUN curl -OL --insecure https://ja.wordpress.org/latest-ja.tar.gz \
 	&& tar -xvf latest-ja.tar.gz \
 	&& mv wordpress /var/www/html/
 
+COPY ./srcs/setup.sh ./
+COPY ./srcs/wp-config.php /var/www/html/wp-config.php
+COPY ./srcs/nginx_config /etc/nginx/sites-available/nginx_config
+
 RUN mkdir -p /var/www/html/test \
 	&& chown -R www-data:www-data /var/www/html/* \
 	&& find /var/www/html/ -type d -exec chmod 755 {} + \
 	&& find /var/www/html/ -type f -exec chmod 644 {} +
-
-COPY ./srcs/setup.sh ./
-COPY ./srcs/wp-config.php /var/www/html/wp-config.php
-COPY ./srcs/nginx_config /etc/nginx/sites-available/nginx_config
 
 RUN ln -s /etc/nginx/sites-available/nginx_config /etc/nginx/sites-enabled/nginx_config \
 	&& rm -rf /etc/nginx/sites-enabled/default
