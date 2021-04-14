@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		curl \
 		nginx \
 		openssl \
+		php-mbstring \
 		mariadb-server \
 		php-fpm php-mysql \
 		php7.3 \
@@ -40,6 +41,7 @@ RUN curl -OL --insecure https://ja.wordpress.org/latest-ja.tar.gz \
 COPY ./srcs/setup.sh ./
 COPY ./srcs/wp-config.php /var/www/html/wp-config.php
 COPY ./srcs/nginx_config /etc/nginx/sites-available/nginx_config
+COPY ./srcs/config.inc.php /var/www/html/phpmyadmin/config.inc.php
 
 RUN mkdir -p /var/www/html/test \
 	&& chown -R www-data:www-data /var/www/html/* \
