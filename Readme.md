@@ -77,15 +77,14 @@ docker stop ft_server && docker rm ft_server && docker rmi ft_server
 # ローカルのnginxを落とす
 service nginx stop
 
-docker ps -a
-で出てくるコンテナを全部消す
-
 ストップしてから一括消去コマンド
 docker container prune
 
-docker images
-いらないimageを全部消す
+停止したコンテナと未使用のすべてのイメージを削除
+docker system prune -a
 ```
+
+[Dockerのイメージ、コンテナおよびボリュームを削除する方法 | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes-ja)
 
 ## その他 Tips
 
