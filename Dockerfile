@@ -39,7 +39,7 @@ RUN curl -OL --insecure https://ja.wordpress.org/latest-ja.tar.gz \
 	&& mv wordpress /var/www/html/
 
 COPY ./srcs/setup.sh ./
-COPY ./srcs/wp-config.php /var/www/html/wp-config.php
+COPY ./srcs/wp-config.php /var/www/html/wordpress/wp-config.php
 COPY ./srcs/nginx_config /etc/nginx/sites-available/nginx_config
 COPY ./srcs/config.inc.php /var/www/html/phpmyadmin/config.inc.php
 
