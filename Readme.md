@@ -47,6 +47,12 @@ docker logs -f ft_server
 netstat -antu
 ```
 
+## nginxの設定ファイルを表示
+
+```
+nginx -t
+```
+
 ## 停止しているコンテナを一括消去
 
 ```terminal
